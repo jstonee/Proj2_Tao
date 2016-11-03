@@ -17,7 +17,7 @@ boolean push(data d, int num, List* lst)
 	node *temp = lst->top;
 	if(temp == NULL)
 	{
-		temp->next = malloc(sizeof(node));
+		temp->next = (struct node*)malloc(sizeof(node));
 		temp->next->d = d;
 		que(num, temp->next->lines);
 		temp->next->next = NULL;
@@ -33,7 +33,7 @@ boolean push(data d, int num, List* lst)
 		}
 		temp = temp->next;
 	}
-	temp->next = malloc(sizeof(node));
+	temp->next = (struct node*)malloc(sizeof(node));
 	temp->next->d = d;
 	que(num, temp->next->lines);
 	temp->next->next = NULL;
@@ -42,7 +42,7 @@ boolean push(data d, int num, List* lst)
 	return true;
 }
 // Possibly used to empty the linked list? Not sure if this function is needed yet
-data pop(List* lst)
+void empty(List* lst)
 {
 	
 }

@@ -16,38 +16,38 @@ void init(Queue* q)
 void que(int x, Queue* q)
 {
 	node *temp;
-	if(rear == NULL)
+	if(q->rear == NULL)
 	{
-		rear = malloc(sizeof(node));
-		rear->num = x;
-		rear->next = NULL;
-		front = rear;
+		q->rear = (struct node*)malloc(sizeof(node));
+		q->rear->num = x;
+		q->rear->next = NULL;
+		q->front = q->rear;
 	}
 	else
 	{
-		temp = malloc(sizeof(node));
-		rear->next = temp;
-		temp->num = x;
-		temp->next = NULL;
-		rear = temp;
+		temp = (struct node*)malloc(sizeof(node));
+		q->rear->next = temp;
+		q->temp->num = x;
+		q->temp->next = NULL;
+		q->rear = temp;
 	}
 	q->count++;
 }
 // Used to empty list??
-int deq(Queue* q)
+void deq(Queue* q)
 {
-	
+
 }
 // Prints the line numbers 
 void printLines(FILE *f, Queue* q)
 {
 	node *temp = q->front;
 	
-	while(temp != rear)
+	while(temp != q->rear)
 	{
 		fprintf(f, "%d ", temp->num);
 		temp = temp->next;
 	}
-	if (temp == rear)
+	if (temp == q->rear)
 		fprintf(f, "%d", temp->num);
 }

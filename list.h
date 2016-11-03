@@ -27,6 +27,6 @@ typedef struct List List;
 boolean isEmpty(const List* lst);
 void init(List* lst);
 boolean push(data d, int num, List* lst);
-data pop(List* lst);
+void empty(List* lst);
 void sort(List* lst);
 void printList(FILE *f, List* lst);
