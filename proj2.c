@@ -50,25 +50,37 @@ void getInfo(FILE *f, List *l)
 	char *temp = (char*)malloc(sizeof(char) * MAX);
 	while(fscanf(f, "%c", &ch) != EOF)
 	{
-		printf("INSIDE GETINFO on Line %d\n", line);
 		if(isalpha(ch))
 		{
-			append(&temp, ch, count);
+			append(temp, ch, count);
 			count++;
 		}
 		if(!isalpha(ch) && count > 0)
 		{
-			if(push(temp, line, &l))
-			{
-				strcpy(temp, "");
-				count = 0;
-			}
-			else
-				printf("ERROR: Did not push %s", temp);
+			push(temp, line, l);
+			strcpy(temp, "");
+			count = 0;
 		}
 		if(ch == '\n')
 			line++;
-		if(ch == '/' || ch == '*')
+		if (ch == '*')
+		{
+			fscanf(f, "%c", &ch);
+			if(isalpha(ch))
+			{
+				append(temp, ch, count);
+				count++;
+			}
+			else
+			{
+				while(ch != '\n')
+				{
+					fscanf(f, "%c", &ch);
+				}
+				line++;
+			}
+		}
+		if(ch == '/')
 		{
 			while(ch != '\n')
 			{

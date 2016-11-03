@@ -9,26 +9,26 @@ bool isEmpty(const List* lst)
 void init(List* lst)
 {
 	lst->count = 0;
-	lst->top->next = NULL;
+	lst->top = NULL;
 }
 // Pushes an identifier and it's line number to the linked list, it also checks if it is in the list first and if it is then it just ques the line number
-void push(data* d, int num, List* lst)
+void push(data d, int num, List* lst)
 {
 	node *temp = lst->top;
-	if(temp->next == NULL)
+	if(temp == NULL)
 	{
-		printf("INSIDE PUSH(NULL)\n");
-		temp->next = (struct node*)malloc(sizeof(node));
-		temp->next->d = d;
+		temp = (struct node*)malloc(sizeof(node));
+		temp->d = (char*)malloc(sizeof(char));
+		strcpy(temp->d, d);
 		qInit(temp->lines);
-		que(num, temp->next->lines);
-		temp->next->next = NULL;
+		que(num, temp->lines);
+		temp->next = NULL;
+		lst->top = temp;
 		lst->count++;
 		return;
 	}
 	while(temp->next != NULL)
 	{
-		printf("INSIDE PUSH\n");
 		if(temp->d == d)
 		{
 			if(isQEmpty(temp->lines) == 0)
@@ -46,7 +46,8 @@ void push(data* d, int num, List* lst)
 		temp = temp->next;
 	}
 	temp->next = (struct node*)malloc(sizeof(node));
-	temp->next->d = d;
+	temp->next->d = (char*)malloc(sizeof(char));
+	strcpy(temp->next->d, d);
 	que(num, temp->next->lines);
 	temp->next->next = NULL;
 	lst->count++;
@@ -71,7 +72,6 @@ void sort(List* lst)
 	
 	for( i = 0; i < size - 1; i++, k--) 
 	{
-		printf("INSIDE SORT\n");
 		current = lst->top;
 		next = current->next;
 		for ( j = 1; j < k; j++)

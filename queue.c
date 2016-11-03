@@ -8,6 +8,7 @@ bool isQEmpty(const Queue* q)
 // Initalizes the queue
 void qInit(Queue* q)
 {
+	q = (struct qNode*)malloc(sizeof(qNode));
 	q->count = 0;
 	q->front = NULL;
 	q->rear = NULL;
@@ -16,12 +17,15 @@ void qInit(Queue* q)
 void que(int x, Queue* q)
 {
 	qNode *temp;
-	if(q->rear == NULL)
+	if(q == NULL)
 	{
-		q->rear = (struct qNode*)malloc(sizeof(qNode));
-		q->rear->num = x;
-		q->rear->next = NULL;
+		temp = (struct qNode*)malloc(sizeof(qNode));
+		temp->num = x;
+		temp->next = NULL;
+		q = temp;
 		q->front = q->rear;
+		q->count++;
+		return;
 	}
 	else
 	{

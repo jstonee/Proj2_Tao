@@ -5,7 +5,7 @@
 
 #define EMPTY 0
 
-typedef char data;
+typedef char* data;
 
 struct node
 {
