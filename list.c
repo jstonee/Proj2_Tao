@@ -29,19 +29,23 @@ void push(data d, int num, List* lst)
 		lst->count++;
 		return;
 	}
-	while(temp != NULL)
+	while(temp->next != NULL)
 	{
-		if(strcmp(temp->d, d) == 0)
+		if(strcmp(temp->next->d, d) == 0)
 		{
-			if(isQEmpty(temp->lines) == 1)
+			temp = temp->next;
+			if(strcmp(temp->d, d) == 0)
 			{
-				que(num, temp->lines);
-				return;
-			}
-			else
-			{
-				que(num, temp->lines);
-				return;	
+				if(isQEmpty(temp->lines) == 1)
+				{
+					que(num, temp->lines);
+					return;
+				}
+				else
+				{
+					que(num, temp->lines);
+					return;	
+				}
 			}
 		}
 		temp = temp->next;
