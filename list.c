@@ -15,7 +15,15 @@ void init(List* lst)
 boolean push(data d, int num, List* lst)
 {
 	node *temp = lst->top;
-	
+	if(temp == NULL)
+	{
+		temp->next = malloc(sizeof(node));
+		temp->next->d = d;
+		que(num, temp->next->lines);
+		temp->next->next = NULL;
+		lst->count++;
+		return true;
+	}
 	while(temp->next != NULL)
 	{
 		if(temp->d == d)
@@ -41,10 +49,45 @@ data pop(List* lst)
 // Sorts the linked list to be in alphabetical order
 void sort(List* lst)
 {
+	int i, j, k;
+	data tempD;
+	Queue* tempQue;
+	int size = lst->count;
+	k = size;
+	node *current;
+	node *next;
 	
+	for( i = 0; i < size - 1; i++, k--) 
+	{
+		current = lst->top;
+		next = lst->next;
+		for ( j = 1; j < k; j++)
+		{
+			if(strcmp(current->d, next->d) > 0)
+			{
+				tempD = current->d;
+				current->d = next->d;
+				next->d = tempD;
+				
+				tempQue = current->lines;
+				current->lines = next->lines;
+				next->lines = tempQue;
+			}
+			current = current->next;
+			next = next->next;
+		}
+	}
 }
 // Prints the linked list and it's line numbers
 void printList(List* lst)
 {
+	node *temp = lst->top;
 	
+	while(temp != NULL)
+	{
+		printf("%s: ", temp->d);
+		printLines(temp->lines);
+		printf("\n");
+		temp = temp->next;
+	}
 }
