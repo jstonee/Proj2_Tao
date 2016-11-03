@@ -20,7 +20,9 @@ void push(data d, int num, List* lst)
 		temp = (struct node*)malloc(sizeof(node));
 		temp->d = (char*)malloc(sizeof(char));
 		strcpy(temp->d, d);
-		qInit(temp->lines);
+		Queue* q = (Queue*)malloc(sizeof(Queue));
+		qInit(q);
+		temp->lines = q;
 		que(num, temp->lines);
 		temp->next = NULL;
 		lst->top = temp;
@@ -31,9 +33,8 @@ void push(data d, int num, List* lst)
 	{
 		if(temp->d == d)
 		{
-			if(isQEmpty(temp->lines) == 0)
+			if(isQEmpty(temp->lines) == 1)
 			{
-				qInit(temp->lines);
 				que(num, temp->lines);
 				return;
 			}
@@ -48,6 +49,9 @@ void push(data d, int num, List* lst)
 	temp->next = (struct node*)malloc(sizeof(node));
 	temp->next->d = (char*)malloc(sizeof(char));
 	strcpy(temp->next->d, d);
+	Queue* q = (Queue*)malloc(sizeof(Queue));
+	qInit(q);
+	temp->next->lines = q;
 	que(num, temp->next->lines);
 	temp->next->next = NULL;
 	lst->count++;
@@ -98,10 +102,9 @@ void printList(FILE *f, List* lst)
 	
 	while(temp != NULL)
 	{
-		printf("INSIDE PRINTLIST\n");
 		fprintf(f, "%s: ", temp->d);
 		printLines(f, temp->lines);
-		printf("\n");
+		fprintf(f, "\n");
 		temp = temp->next;
 	}
 }
