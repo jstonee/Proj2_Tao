@@ -24,5 +24,4 @@ typedef struct Queue Queue;
 bool isQEmpty(const Queue* q);
 void qInit(Queue* q);
 void que(int x, Queue* q);
-void deq(Queue* q);
 void printLines(FILE *f, Queue* q);

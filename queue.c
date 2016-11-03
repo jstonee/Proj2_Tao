@@ -28,6 +28,8 @@ void que(int x, Queue* q)
 	}
 	else
 	{
+		if(q->rear->num == x)
+			return;
 		temp = (struct qNode*)malloc(sizeof(qNode));
 		q->rear->next = temp;
 		temp->num = x;
@@ -35,11 +37,6 @@ void que(int x, Queue* q)
 		q->rear = temp;
 	}
 	q->count++;
-}
-// Used to empty list??
-void deq(Queue* q)
-{
-
 }
 // Prints the line numbers 
 void printLines(FILE *f, Queue* q)

@@ -29,9 +29,9 @@ void push(data d, int num, List* lst)
 		lst->count++;
 		return;
 	}
-	while(temp->next != NULL)
+	while(temp != NULL)
 	{
-		if(temp->d == d)
+		if(strcmp(temp->d, d) == 0)
 		{
 			if(isQEmpty(temp->lines) == 1)
 			{
@@ -57,11 +57,6 @@ void push(data d, int num, List* lst)
 	lst->count++;
 	
 	return;
-}
-// Possibly used to empty the linked list? Not sure if this function is needed yet
-void empty(List* lst)
-{
-	
 }
 // Sorts the linked list to be in alphabetical order
 void sort(List* lst)

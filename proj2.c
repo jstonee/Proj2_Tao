@@ -2,6 +2,7 @@
 #include "list.h"
 
 #define MAX 100
+// Adds a character to the end of our current string
 void append(char* old, const char c, int x);
 // Will put data into the list and queue
 void getInfo(FILE *f, List *l);
