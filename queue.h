@@ -10,7 +10,7 @@ typedef enum { false, true } boolean;
 struct node
 {
 	int num;
-	struct node* next;
+	struct node *next;
 };
 
 typedef struct node node;
@@ -18,7 +18,8 @@ typedef struct node node;
 struct Queue
 {
 	int count;
-	node *top;
+	node *front;
+	node *rear;
 };
 
 boolean isQEmpty(const Queue* q);
