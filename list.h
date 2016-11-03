@@ -19,12 +19,14 @@ typedef struct node node;
 
 struct List
 {
+	int count;
 	node *top;	
 };
 typedef struct List List;
 
 boolean isEmpty(const List* lst);
 void init(List* lst);
-void push(data d, List* lst);
+boolean push(data d, int num, List* lst);
 data pop(List* lst);
-// void sort(List* lst);
+void sort(List* lst);
+void printList(List* lst);
