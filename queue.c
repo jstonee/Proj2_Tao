@@ -39,15 +39,15 @@ int deq(Queue* q)
 	
 }
 // Prints the line numbers 
-void printLines(Queue* q)
+void printLines(FILE *f, Queue* q)
 {
 	node *temp = q->front;
 	
 	while(temp != rear)
 	{
-		printf("%d ", temp->num);
+		fprintf(f, "%d ", temp->num);
 		temp = temp->next;
 	}
 	if (temp == rear)
-		printf("%d", temp->num);
+		fprintf(f, "%d", temp->num);
 }

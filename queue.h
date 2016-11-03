@@ -26,4 +26,4 @@ boolean isQEmpty(const Queue* q);
 void init(Queue* q);
 void que(int x, Queue* q);
 int deq(Queue* q);
-void printLines(Queue* q);
+void printLines(FILE *f, Queue* q);

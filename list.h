@@ -29,4 +29,4 @@ void init(List* lst);
 boolean push(data d, int num, List* lst);
 data pop(List* lst);
 void sort(List* lst);
-void printList(List* lst);
+void printList(FILE *f, List* lst);

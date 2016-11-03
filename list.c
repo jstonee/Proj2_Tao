@@ -79,13 +79,13 @@ void sort(List* lst)
 	}
 }
 // Prints the linked list and it's line numbers
-void printList(List* lst)
+void printList(FILE *f, List* lst)
 {
 	node *temp = lst->top;
 	
 	while(temp != NULL)
 	{
-		printf("%s: ", temp->d);
+		fprintf(f, "%s: ", temp->d);
 		printLines(temp->lines);
 		printf("\n");
 		temp = temp->next;
