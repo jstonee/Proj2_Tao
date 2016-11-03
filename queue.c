@@ -45,6 +45,7 @@ void printLines(FILE *f, Queue* q)
 	
 	while(temp != q->rear)
 	{
+		printf("INSIDE PRINTLINES\n");
 		fprintf(f, "%d ", temp->num);
 		temp = temp->next;
 	}

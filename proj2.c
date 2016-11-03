@@ -1,8 +1,11 @@
 #include <ctype.h>
 #include "list.h"
 
+#define MAX 100
+void append(char* old, const char c, int x);
 // Will put data into the list and queue
 void getInfo(FILE *f, List *l);
+
 
 int main(int argc, char* argv[])
 {
@@ -34,31 +37,44 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
+void append(char* old, const char c, int x)
+{
+	old[x] = c;
+	old[x+1] = '\0';
+}
+
 void getInfo(FILE *f, List *l)
 {
 	char ch;
-	int line = 1;
-	char *temp = (char*)malloc(sizeof(char));
+	int line = 1, count = 0;
+	char *temp = (char*)malloc(sizeof(char) * MAX);
 	while(fscanf(f, "%c", &ch) != EOF)
 	{
+		printf("INSIDE GETINFO on Line %d\n", line);
 		if(isalpha(ch))
 		{
-			strcat(temp, ch);
+			append(&temp, ch, count);
+			count++;
 		}
-		if(!isalpha(ch) && strlen(temp) > 0)
+		if(!isalpha(ch) && count > 0)
 		{
 			if(push(temp, line, &l))
+			{
 				strcpy(temp, "");
+				count = 0;
+			}
 			else
 				printf("ERROR: Did not push %s", temp);
 		}
-		if(ch == '/' || ch == '*')
-		{
-			while(fscanf(f, "%c", &ch) != '\n')
-				fscanf(f, "%c", &ch);
-			line++;
-		}
 		if(ch == '\n')
 			line++;
+		if(ch == '/' || ch == '*')
+		{
+			while(ch != '\n')
+			{
+				fscanf(f, "%c", &ch);
+			}
+			line++;
+		}
 	}
 }

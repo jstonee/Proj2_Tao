@@ -9,34 +9,39 @@ bool isEmpty(const List* lst)
 void init(List* lst)
 {
 	lst->count = 0;
-	lst->top = NULL;
+	lst->top->next = NULL;
 }
 // Pushes an identifier and it's line number to the linked list, it also checks if it is in the list first and if it is then it just ques the line number
-bool push(data d, int num, List* lst)
+void push(data* d, int num, List* lst)
 {
 	node *temp = lst->top;
-	if(temp == NULL)
+	if(temp->next == NULL)
 	{
+		printf("INSIDE PUSH(NULL)\n");
 		temp->next = (struct node*)malloc(sizeof(node));
 		temp->next->d = d;
 		qInit(temp->lines);
 		que(num, temp->next->lines);
 		temp->next->next = NULL;
 		lst->count++;
-		return true;
+		return;
 	}
 	while(temp->next != NULL)
 	{
+		printf("INSIDE PUSH\n");
 		if(temp->d == d)
 		{
 			if(isQEmpty(temp->lines) == 0)
+			{
 				qInit(temp->lines);
+				que(num, temp->lines);
+				return;
+			}
 			else
 			{
 				que(num, temp->lines);
-				return true;	
+				return;	
 			}
-
 		}
 		temp = temp->next;
 	}
@@ -46,7 +51,7 @@ bool push(data d, int num, List* lst)
 	temp->next->next = NULL;
 	lst->count++;
 	
-	return true;
+	return;
 }
 // Possibly used to empty the linked list? Not sure if this function is needed yet
 void empty(List* lst)
@@ -66,6 +71,7 @@ void sort(List* lst)
 	
 	for( i = 0; i < size - 1; i++, k--) 
 	{
+		printf("INSIDE SORT\n");
 		current = lst->top;
 		next = current->next;
 		for ( j = 1; j < k; j++)
@@ -92,6 +98,7 @@ void printList(FILE *f, List* lst)
 	
 	while(temp != NULL)
 	{
+		printf("INSIDE PRINTLIST\n");
 		fprintf(f, "%s: ", temp->d);
 		printLines(f, temp->lines);
 		printf("\n");
