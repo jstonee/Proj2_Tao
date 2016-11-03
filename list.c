@@ -1,9 +1,9 @@
 #include "list.h"
 
 // Checks if the linked list is empty
-boolean isEmpty(const List* lst)
+bool isEmpty(const List* lst)
 {
-	return ((boolean)(lst->count == EMPTY))
+	return ((bool)(lst->count == EMPTY));
 }
 // Initalizes the linked list
 void init(List* lst)
@@ -12,13 +12,14 @@ void init(List* lst)
 	lst->top = NULL;
 }
 // Pushes an identifier and it's line number to the linked list, it also checks if it is in the list first and if it is then it just ques the line number
-boolean push(data d, int num, List* lst)
+bool push(data d, int num, List* lst)
 {
 	node *temp = lst->top;
 	if(temp == NULL)
 	{
 		temp->next = (struct node*)malloc(sizeof(node));
 		temp->next->d = d;
+		qInit(temp->lines);
 		que(num, temp->next->lines);
 		temp->next->next = NULL;
 		lst->count++;
@@ -28,8 +29,14 @@ boolean push(data d, int num, List* lst)
 	{
 		if(temp->d == d)
 		{
-			que(num, temp->lines);
-			return true;
+			if(isQEmpty(temp->lines) == 0)
+				qInit(temp->lines);
+			else
+			{
+				que(num, temp->lines);
+				return true;	
+			}
+
 		}
 		temp = temp->next;
 	}
@@ -60,7 +67,7 @@ void sort(List* lst)
 	for( i = 0; i < size - 1; i++, k--) 
 	{
 		current = lst->top;
-		next = lst->next;
+		next = current->next;
 		for ( j = 1; j < k; j++)
 		{
 			if(strcmp(current->d, next->d) > 0)
@@ -86,7 +93,7 @@ void printList(FILE *f, List* lst)
 	while(temp != NULL)
 	{
 		fprintf(f, "%s: ", temp->d);
-		printLines(temp->lines);
+		printLines(f, temp->lines);
 		printf("\n");
 		temp = temp->next;
 	}

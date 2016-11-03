@@ -1,12 +1,12 @@
 #include "queue.h"
 
 // Checks if the queue is empty
-boolean isQEmpty(const Queue* q)
+bool isQEmpty(const Queue* q)
 {
-	return ((boolean)(q->count == EMPTY));
+	return ((bool)(q->count == EMPTY));
 }
 // Initalizes the queue
-void init(Queue* q)
+void qInit(Queue* q)
 {
 	q->count = 0;
 	q->front = NULL;
@@ -15,20 +15,20 @@ void init(Queue* q)
 // Adds a number to the current queue if there one, else it will create a new queue
 void que(int x, Queue* q)
 {
-	node *temp;
+	qNode *temp;
 	if(q->rear == NULL)
 	{
-		q->rear = (struct node*)malloc(sizeof(node));
+		q->rear = (struct qNode*)malloc(sizeof(qNode));
 		q->rear->num = x;
 		q->rear->next = NULL;
 		q->front = q->rear;
 	}
 	else
 	{
-		temp = (struct node*)malloc(sizeof(node));
+		temp = (struct qNode*)malloc(sizeof(qNode));
 		q->rear->next = temp;
-		q->temp->num = x;
-		q->temp->next = NULL;
+		temp->num = x;
+		temp->next = NULL;
 		q->rear = temp;
 	}
 	q->count++;
@@ -41,7 +41,7 @@ void deq(Queue* q)
 // Prints the line numbers 
 void printLines(FILE *f, Queue* q)
 {
-	node *temp = q->front;
+	qNode *temp = q->front;
 	
 	while(temp != q->rear)
 	{

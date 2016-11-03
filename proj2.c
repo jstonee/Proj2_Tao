@@ -1,6 +1,5 @@
 #include <ctype.h>
 #include "list.h"
-#include "queue.h"
 
 // Will put data into the list and queue
 void getInfo(FILE *f, List *l);
@@ -8,6 +7,7 @@ void getInfo(FILE *f, List *l);
 int main(int argc, char* argv[])
 {
 	List l;
+	init(&l);
 	FILE *fin, *fout;
 
 	if (argc != 3)
@@ -52,7 +52,7 @@ void getInfo(FILE *f, List *l)
 			else
 				printf("ERROR: Did not push %s", temp);
 		}
-		if(ch == '/')
+		if(ch == '/' || ch == '*')
 		{
 			while(fscanf(f, "%c", &ch) != '\n')
 				fscanf(f, "%c", &ch);

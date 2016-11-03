@@ -1,29 +1,28 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 #define EMPTY 0
-#define FULL 10000
 
-typedef enum { false, true } boolean;
-
-struct node
+struct qNode
 {
 	int num;
-	struct node *next;
+	struct qNnode *next;
 };
 
-typedef struct node node;
+typedef struct qNode qNode;
 
 struct Queue
 {
 	int count;
-	node *front;
-	node *rear;
+	qNode *front;
+	qNode *rear;
 };
+typedef struct Queue Queue;
 
-boolean isQEmpty(const Queue* q);
-void init(Queue* q);
+bool isQEmpty(const Queue* q);
+void qInit(Queue* q);
 void que(int x, Queue* q);
 void deq(Queue* q);
 void printLines(FILE *f, Queue* q);
